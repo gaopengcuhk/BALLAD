@@ -1,0 +1,30 @@
+coslr: true
+criterions:
+  PerformanceLoss:
+    def_file: ./loss/SoftmaxLoss.py
+    loss_params: {}
+    optim_params: null
+    weight: 1.0
+endlr: 0.0
+last: false
+model:
+  clip:
+    optim_params: {lr: 0.00001, momentum: 0.9, weight_decay: 0.0005}
+    params: {visual_backbone: 'RN50'}
+  adapter:
+    optim_params: {lr: 0.2, momentum: 0.9, weight_decay: 0.0005}
+    params: {feat_dim: 1024}
+shuffle: true
+training_opt:
+  phaseA: true
+  batch_size: 512
+  dataset: ImageNet_LT
+  display_step: 10
+  feature_dim: 1024
+  log_dir: ./output_A
+  num_classes: 1000
+  num_epochs: 50
+  num_workers: 12
+  open_threshold: 0.1
+  sampler: null
+  scheduler_params: {gamma: 0.1, step_size: 3}

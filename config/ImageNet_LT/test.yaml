@@ -1,0 +1,31 @@
+coslr: true
+criterions:
+  PerformanceLoss:
+    def_file: ./loss/SoftmaxLoss.py
+    loss_params: {}
+    optim_params: null
+    weight: 1.0
+endlr: 0.0
+last: false
+model_dir: ./output_B/final_model_checkpoint.pth
+model:
+  clip:
+    optim_params: {lr: 0.00001, momentum: 0.9, weight_decay: 0.0005}
+    params: {visual_backbone: 'RN50'}
+  adapter:
+    optim_params: {lr: 0.2, momentum: 0.9, weight_decay: 0.0005}
+    params: {feat_dim: 1024}
+shuffle: true
+training_opt:
+  phaseA: False
+  batch_size: 512
+  dataset: ImageNet_LT
+  display_step: 10
+  feature_dim: 1024
+  log_dir: ./output_B
+  num_classes: 1000
+  num_epochs: 10
+  num_workers: 12
+  open_threshold: 0.1
+  sampler: {def_file: ./data/ClassAwareSampler.py, num_samples_cls: 4, type: ClassAwareSampler}
+  scheduler_params: {gamma: 0.1, step_size: 3}
